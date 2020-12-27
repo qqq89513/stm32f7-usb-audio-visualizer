@@ -36,6 +36,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define LCD_MAX_X    480
+#define LCD_MAX_Y    272
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -173,7 +175,26 @@ int main(void)
   /* USER CODE BEGIN 2 */
   printf("MX initialized.\r\n");
   printf("Initializing BSP...\r\n");
+  
+  // BSP audio initialization
+  if(BSP_AUDIO_IN_InitEx(INPUT_DEVICE_DIGITAL_MICROPHONE_2, SAI_AUDIO_FREQUENCY_44K, DEFAULT_AUDIO_IN_BIT_RESOLUTION, 1) == AUDIO_OK)
+    printf("BSP_AUDIO initailized.\r\n");
+  else
+    printf("BSP_AUDIO failed to initailized. @line:%d\r\n", __LINE__);
 
+  // BSP LCD initialization
+  BSP_LCD_Init();
+  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
+  BSP_LCD_SelectLayer(0);
+  BSP_LCD_Clear(LCD_COLOR_BLACK);
+  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+  BSP_LCD_SetFont(&Font12);
+
+  // BSP touch screen initializtion
+  BSP_TS_Init(LCD_MAX_X, LCD_MAX_Y);
+
+  printf("BSP_LCD, BSP_TS initialized.\r\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -566,7 +587,7 @@ static void MX_SAI2_Init(void)
   hsai_BlockA2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
   hsai_BlockA2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
   hsai_BlockA2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
-  hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_192K;
+  hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_44K;
   hsai_BlockA2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockA2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockA2.Init.CompandingMode = SAI_NOCOMPANDING;
