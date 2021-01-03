@@ -158,7 +158,7 @@ static int8_t AUDIO_Init_FS(uint32_t AudioFreq, uint32_t Volume, uint32_t option
      printf("BSP_AUDIO initailized.\r\n");
   else
     printf("BSP_AUDIO failed to initailized. @line:%d\r\n", __LINE__);
-  
+
   /* Update the Audio frame slot configuration to match the PCM standard instead of TDM */
   BSP_AUDIO_OUT_SetAudioFrameSlot(CODEC_AUDIOFRAME_SLOT_02);
   return (USBD_OK);
@@ -191,10 +191,12 @@ static int8_t AUDIO_AudioCmd_FS(uint8_t* pbuf, uint32_t size, uint8_t cmd)
   switch(cmd)
   {
     case AUDIO_CMD_START:
+      // TouchGFX freezes with calling this line
       BSP_AUDIO_OUT_Play((uint16_t *)pbuf, 2*size);
       break;
-  
+
     case AUDIO_CMD_PLAY:
+      // Seems to never be called
       BSP_AUDIO_OUT_ChangeBuffer((uint16_t *)pbuf, 2*size);
       break;
   }
