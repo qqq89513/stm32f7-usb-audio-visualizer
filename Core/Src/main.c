@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "app_touchgfx.h"
 #include "usb_device.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -174,7 +175,12 @@ int main(void)
   MX_TIM12_Init();
   MX_USART1_UART_Init();
   MX_USB_DEVICE_Init();
+  MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
+  if(BSP_SDRAM_Init() == SDRAM_OK)
+    printf("SDRAM Initialized.\r\n");
+  else
+    printf("SDRAM Init failed. @line:%d\r\n", __LINE__);
   printf("MX initialized.\r\n");
   printf("Initializing BSP...\r\n");
   
@@ -183,15 +189,6 @@ int main(void)
 //    printf("BSP_AUDIO initailized.\r\n");
 //  else
 //    printf("BSP_AUDIO failed to initailized. @line:%d\r\n", __LINE__);
-
-  // BSP LCD initialization
-  BSP_LCD_Init();
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
-  BSP_LCD_SelectLayer(0);
-  BSP_LCD_Clear(LCD_COLOR_BLACK);
-  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
-  BSP_LCD_SetFont(&Font12);
 
   // BSP touch screen initializtion
   BSP_TS_Init(LCD_MAX_X, LCD_MAX_Y);
@@ -205,6 +202,7 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
+  MX_TouchGFX_Process();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
