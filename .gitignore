@@ -22,4 +22,4 @@ Release/
 .vscode/
 
 # for touchGFX
-*/TouchGFX/build/
+TouchGFX/build/
