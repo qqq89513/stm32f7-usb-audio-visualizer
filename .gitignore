@@ -20,3 +20,6 @@ Release/
 
 # for user
 .vscode/
+
+# for touchGFX
+*/TouchGFX/build/
