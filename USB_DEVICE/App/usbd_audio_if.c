@@ -23,7 +23,7 @@
 #include "usbd_audio_if.h"
 
 /* USER CODE BEGIN INCLUDE */
-
+#include "stm32746g_discovery_audio.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -154,9 +154,13 @@ USBD_AUDIO_ItfTypeDef USBD_AUDIO_fops_FS =
 static int8_t AUDIO_Init_FS(uint32_t AudioFreq, uint32_t Volume, uint32_t options)
 {
   /* USER CODE BEGIN 0 */
-  UNUSED(AudioFreq);
-  UNUSED(Volume);
-  UNUSED(options);
+  if(BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_AUTO, Volume, AudioFreq) == AUDIO_OK)
+     printf("BSP_AUDIO initailized.\r\n");
+  else
+    printf("BSP_AUDIO failed to initailized. @line:%d\r\n", __LINE__);
+  
+  /* Update the Audio frame slot configuration to match the PCM standard instead of TDM */
+  BSP_AUDIO_OUT_SetAudioFrameSlot(CODEC_AUDIOFRAME_SLOT_02);
   return (USBD_OK);
   /* USER CODE END 0 */
 }
@@ -169,7 +173,7 @@ static int8_t AUDIO_Init_FS(uint32_t AudioFreq, uint32_t Volume, uint32_t option
 static int8_t AUDIO_DeInit_FS(uint32_t options)
 {
   /* USER CODE BEGIN 1 */
-  UNUSED(options);
+  BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
   return (USBD_OK);
   /* USER CODE END 1 */
 }
@@ -187,10 +191,12 @@ static int8_t AUDIO_AudioCmd_FS(uint8_t* pbuf, uint32_t size, uint8_t cmd)
   switch(cmd)
   {
     case AUDIO_CMD_START:
-    break;
-
+      BSP_AUDIO_OUT_Play((uint16_t *)pbuf, 2*size);
+      break;
+  
     case AUDIO_CMD_PLAY:
-    break;
+      BSP_AUDIO_OUT_ChangeBuffer((uint16_t *)pbuf, 2*size);
+      break;
   }
   UNUSED(pbuf);
   UNUSED(size);
@@ -207,7 +213,7 @@ static int8_t AUDIO_AudioCmd_FS(uint8_t* pbuf, uint32_t size, uint8_t cmd)
 static int8_t AUDIO_VolumeCtl_FS(uint8_t vol)
 {
   /* USER CODE BEGIN 3 */
-  UNUSED(vol);
+  BSP_AUDIO_OUT_SetVolume(vol);
   return (USBD_OK);
   /* USER CODE END 3 */
 }
@@ -220,7 +226,7 @@ static int8_t AUDIO_VolumeCtl_FS(uint8_t vol)
 static int8_t AUDIO_MuteCtl_FS(uint8_t cmd)
 {
   /* USER CODE BEGIN 4 */
-  UNUSED(cmd);
+  BSP_AUDIO_OUT_SetMute(cmd);
   return (USBD_OK);
   /* USER CODE END 4 */
 }
@@ -274,7 +280,17 @@ void HalfTransfer_CallBack_FS(void)
 }
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_IMPLEMENTATION */
-
+/**
+  * @brief  Manages the DMA full Transfer complete event.
+  * @param  None
+  * @retval None
+  */
+void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
+{
+  // Don't know what is this for.
+  // Also works without this line when testing
+  USBD_AUDIO_Sync(&hUsbDeviceFS, AUDIO_OFFSET_FULL);
+}
 /* USER CODE END PRIVATE_FUNCTIONS_IMPLEMENTATION */
 
 /**

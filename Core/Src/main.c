@@ -178,11 +178,11 @@ int main(void)
   printf("MX initialized.\r\n");
   printf("Initializing BSP...\r\n");
   
-  // BSP audio initialization
-  if(BSP_AUDIO_IN_InitEx(INPUT_DEVICE_DIGITAL_MICROPHONE_2, SAI_AUDIO_FREQUENCY_44K, DEFAULT_AUDIO_IN_BIT_RESOLUTION, 1) == AUDIO_OK)
-    printf("BSP_AUDIO initailized.\r\n");
-  else
-    printf("BSP_AUDIO failed to initailized. @line:%d\r\n", __LINE__);
+//   BSP audio initialization
+//  if(BSP_AUDIO_IN_InitEx(INPUT_DEVICE_DIGITAL_MICROPHONE_2, SAI_AUDIO_FREQUENCY_44K, DEFAULT_AUDIO_IN_BIT_RESOLUTION, 1) == AUDIO_OK)
+//    printf("BSP_AUDIO initailized.\r\n");
+//  else
+//    printf("BSP_AUDIO failed to initailized. @line:%d\r\n", __LINE__);
 
   // BSP LCD initialization
   BSP_LCD_Init();
