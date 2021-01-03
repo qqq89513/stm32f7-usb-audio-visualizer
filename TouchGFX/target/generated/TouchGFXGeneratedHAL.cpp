@@ -35,18 +35,9 @@ void TouchGFXGeneratedHAL::initialize()
     HAL::initialize();
 
     registerEventListener(*(Application::getInstance()));
-    registerTaskDelayFunction(&OSWrappers::taskDelay);
-    setFrameRefreshStrategy(HAL::REFRESH_STRATEGY_OPTIM_SINGLE_BUFFER_TFT_CTRL);
     enableLCDControllerInterrupt();
     enableInterrupts();
-    setFrameBufferStartAddresses((void*)0xC0000000, (void*)0, (void*)0);
-    /*
-     * Set whether the DMA transfers are locked to the TFT update cycle. If
-     * locked, DMA transfer will not begin until the TFT controller has finished
-     * updating the display. If not locked, DMA transfers will begin as soon as
-     * possible. Default is true (DMA is locked with TFT).
-     */
-    lockDMAToFrontPorch(true);
+    setFrameBufferStartAddresses((void*)0xC0000000, (void*)0xC003FC00, (void*)0);
 }
 
 void TouchGFXGeneratedHAL::configureInterrupts()
@@ -99,20 +90,6 @@ void TouchGFXGeneratedHAL::flushFrameBuffer(const touchgfx::Rect& rect)
 bool TouchGFXGeneratedHAL::blockCopy(void* RESTRICT dest, const void* RESTRICT src, uint32_t numBytes)
 {
   return HAL::blockCopy(dest, src, numBytes);
-}
-
-uint16_t TouchGFXGeneratedHAL::getTFTCurrentLine()
-{
-    // This function only requires an implementation if single buffering
-    // on LTDC display is being used (REFRESH_STRATEGY_OPTIM_SINGLE_BUFFER_TFT_CTRL).
-
-    // The CPSR register (bits 15:0) specify current line of TFT controller.
-    uint16_t curr = (uint16_t)(LTDC->CPSR & 0xffff);
-    uint16_t backPorchY = (uint16_t)(LTDC->BPCR & 0x7FF) + 1;
-
-    // The semantics of the getTFTCurrentLine() function is to return a value
-    // in the range of 0-totalheight. If we are still in back porch area, return 0.
-    return (curr < backPorchY) ? 0 : (curr - backPorchY);
 }
 
 extern "C"

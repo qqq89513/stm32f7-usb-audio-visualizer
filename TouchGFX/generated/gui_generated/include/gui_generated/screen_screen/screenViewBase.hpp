@@ -9,6 +9,9 @@
 #include <gui/screen_screen/screenPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
+#include <touchgfx/widgets/graph/GraphScroll.hpp>
+#include <touchgfx/widgets/graph/GraphElements.hpp>
+#include <touchgfx/widgets/canvas/PainterRGB565.hpp>
 
 class screenViewBase : public touchgfx::View<screenPresenter>
 {
@@ -27,9 +30,17 @@ protected:
      */
     touchgfx::Box __background;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > btn_test;
+    touchgfx::GraphScroll<100> graph_t;
+    touchgfx::GraphElementLine graph_tLine1;
+    touchgfx::PainterRGB565 graph_tLine1Painter;
 
 private:
 
+    /*
+     * Canvas Buffer Size
+     */
+    static const uint16_t CANVAS_BUFFER_SIZE = 7200;
+    uint8_t canvasBuffer[CANVAS_BUFFER_SIZE];
 };
 
 #endif // SCREENVIEWBASE_HPP

@@ -41,10 +41,58 @@
               }
             ],
             "Name": "btn_test",
-            "X": 215,
-            "Y": 111,
+            "X": 0,
+            "Y": 222,
             "Width": 50,
             "Height": 50,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "DynamicGraph",
+            "DataSeed": 1759792312,
+            "NumberOfValues": 100,
+            "MaxY": 2.0,
+            "MinY": -2.0,
+            "Precision": "0.1",
+            "UseCustomVisibleDataPointRange": false,
+            "FirstIndex": 0,
+            "LastIndex": 99,
+            "MapDataPointIndexToCustomValue": false,
+            "XAxisOffset": 0.0,
+            "XAxisScale": 1.0,
+            "InsertRandomValues": true,
+            "Alpha": 255,
+            "LabelSizeTop": 0,
+            "LabelSizeBottom": 0,
+            "LabelSizeLeft": 0,
+            "LabelSizeRight": 0,
+            "PaddingTop": 0,
+            "PaddingBottom": 0,
+            "PaddingLeft": 0,
+            "PaddingRight": 0,
+            "GraphType": "GraphScroll",
+            "GraphDrawers": [
+              {
+                "Type": "LineDrawer",
+                "LineWidth": 2,
+                "Color": {
+                  "Red": 41,
+                  "Green": 255,
+                  "Blue": 207
+                },
+                "Alpha": 255
+              }
+            ],
+            "Name": "graph_t",
+            "X": 80,
+            "Y": 16,
+            "Width": 320,
+            "Height": 240,
             "Visible": true,
             "LockPosition": false,
             "Draggable": false,
@@ -56,7 +104,7 @@
         "Interactions": [],
         "Name": "screen",
         "OverrideDefaultBufferSize": false,
-        "CanvasBufferSize": 0
+        "CanvasBufferSize": 7200
       }
     ],
     "CustomContainerDefinitions": [],

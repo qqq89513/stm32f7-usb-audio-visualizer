@@ -7,16 +7,132 @@
 screenViewBase::screenViewBase()
 {
 
+    touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
+
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
 
     btn_test.setBoxWithBorderPosition(0, 0, 50, 50);
     btn_test.setBorderSize(5);
     btn_test.setBoxWithBorderColors(touchgfx::Color::getColorFrom24BitRGB(0, 102, 153), touchgfx::Color::getColorFrom24BitRGB(0, 153, 204), touchgfx::Color::getColorFrom24BitRGB(0, 51, 102), touchgfx::Color::getColorFrom24BitRGB(51, 102, 153));
-    btn_test.setPosition(215, 111, 50, 50);
+    btn_test.setPosition(0, 222, 50, 50);
+
+    graph_t.setScale(10);
+    graph_t.setPosition(80, 16, 320, 240);
+    graph_t.setGraphAreaMargin(0, 0, 0, 0);
+    graph_t.setGraphAreaPadding(0, 0, 0, 0);
+    graph_t.setGraphRangeY(-2, 2);
+
+    graph_tLine1.setScale(10);
+    graph_tLine1Painter.setColor(touchgfx::Color::getColorFrom24BitRGB(41, 255, 207));
+    graph_tLine1.setPainter(graph_tLine1Painter);
+    graph_tLine1.setLineWidth(2);
+    graph_t.addGraphElement(graph_tLine1);
+
+    graph_t.addDataPoint(-0.417215583610724f);
+    graph_t.addDataPoint(-0.461838269209249f);
+    graph_t.addDataPoint(-0.288148744417035f);
+    graph_t.addDataPoint(0.0941737216314843f);
+    graph_t.addDataPoint(0.618864207415873f);
+    graph_t.addDataPoint(1.17820616174399f);
+    graph_t.addDataPoint(1.64857709749906f);
+    graph_t.addDataPoint(1.92018448607729f);
+    graph_t.addDataPoint(1.92373272833795f);
+    graph_t.addDataPoint(1.6475005875711f);
+    graph_t.addDataPoint(1.14064362572498f);
+    graph_t.addDataPoint(0.501895726138028f);
+    graph_t.addDataPoint(-0.143593109967374f);
+    graph_t.addDataPoint(-0.673652747151312f);
+    graph_t.addDataPoint(-0.997574316951929f);
+    graph_t.addDataPoint(-1.07676142754346f);
+    graph_t.addDataPoint(-0.932556946363063f);
+    graph_t.addDataPoint(-0.639393510302043f);
+    graph_t.addDataPoint(-0.305010288759501f);
+    graph_t.addDataPoint(-0.0426407488116348f);
+    graph_t.addDataPoint(0.0579612033867787f);
+    graph_t.addDataPoint(-0.0464866312869641f);
+    graph_t.addDataPoint(-0.341454133340161f);
+    graph_t.addDataPoint(-0.757716209125886f);
+    graph_t.addDataPoint(-1.18818210698272f);
+    graph_t.addDataPoint(-1.51432131186617f);
+    graph_t.addDataPoint(-1.63570765409345f);
+    graph_t.addDataPoint(-1.49542759077121f);
+    graph_t.addDataPoint(-1.09509854503038f);
+    graph_t.addDataPoint(-0.495777807687519f);
+    graph_t.addDataPoint(0.195513084333107f);
+    graph_t.addDataPoint(0.850407775353221f);
+    graph_t.addDataPoint(1.34899344715719f);
+    graph_t.addDataPoint(1.6075582355748f);
+    graph_t.addDataPoint(1.59755732881529f);
+    graph_t.addDataPoint(1.35121598656455f);
+    graph_t.addDataPoint(0.952452588493452f);
+    graph_t.addDataPoint(0.515391334168578f);
+    graph_t.addDataPoint(0.155763266201633f);
+    graph_t.addDataPoint(-0.0377765911482054f);
+    graph_t.addDataPoint(-0.0253791851155916f);
+    graph_t.addDataPoint(0.174542536589409f);
+    graph_t.addDataPoint(0.490434946799339f);
+    graph_t.addDataPoint(0.816023604312622f);
+    graph_t.addDataPoint(1.03748652361727f);
+    graph_t.addDataPoint(1.06268145826048f);
+    graph_t.addDataPoint(0.845217243642808f);
+    graph_t.addDataPoint(0.397415741176133f);
+    graph_t.addDataPoint(-0.211073920442741f);
+    graph_t.addDataPoint(-0.868733451190036f);
+    graph_t.addDataPoint(-1.44798556614644f);
+    graph_t.addDataPoint(-1.83509620530993f);
+    graph_t.addDataPoint(-1.95690074704041f);
+    graph_t.addDataPoint(-1.79785576725351f);
+    graph_t.addDataPoint(-1.40327524355519f);
+    graph_t.addDataPoint(-0.867982029525072f);
+    graph_t.addDataPoint(-0.313163013484652f);
+    graph_t.addDataPoint(0.142908005406286f);
+    graph_t.addDataPoint(0.413127737548098f);
+    graph_t.addDataPoint(0.461910158061324f);
+    graph_t.addDataPoint(0.312680370410439f);
+    graph_t.addDataPoint(0.0407293437416533f);
+    graph_t.addDataPoint(-0.246765176423281f);
+    graph_t.addDataPoint(-0.438597574466765f);
+    graph_t.addDataPoint(-0.448388839408267f);
+    graph_t.addDataPoint(-0.237306323189566f);
+    graph_t.addDataPoint(0.174976141857669f);
+    graph_t.addDataPoint(0.713818949016399f);
+    graph_t.addDataPoint(1.26684274761975f);
+    graph_t.addDataPoint(1.71066335291999f);
+    graph_t.addDataPoint(1.9406215271875f);
+    graph_t.addDataPoint(1.8962475800054f);
+    graph_t.addDataPoint(1.57623269502379f);
+    graph_t.addDataPoint(1.03923457991543f);
+    graph_t.addDataPoint(0.390301171592758f);
+    graph_t.addDataPoint(-0.243795176331669f);
+    graph_t.addDataPoint(-0.744315954395583f);
+    graph_t.addDataPoint(-1.02817205415244f);
+    graph_t.addDataPoint(-1.06669421540372f);
+    graph_t.addDataPoint(-0.891024341274597f);
+    graph_t.addDataPoint(-0.582873393726609f);
+    graph_t.addDataPoint(-0.252972859890495f);
+    graph_t.addDataPoint(-0.0125569464171407f);
+    graph_t.addDataPoint(0.055085656021106f);
+    graph_t.addDataPoint(-0.0840222712813379f);
+    graph_t.addDataPoint(-0.405533396141337f);
+    graph_t.addDataPoint(-0.832349743740966f);
+    graph_t.addDataPoint(-1.25343446477635f);
+    graph_t.addDataPoint(-1.55125809886457f);
+    graph_t.addDataPoint(-1.63114931815102f);
+    graph_t.addDataPoint(-1.44534101842361f);
+    graph_t.addDataPoint(-1.00578983725128f);
+    graph_t.addDataPoint(-0.382585923437876f);
+    graph_t.addDataPoint(0.311711780294708f);
+    graph_t.addDataPoint(0.94803809714466f);
+    graph_t.addDataPoint(1.41078984954275f);
+    graph_t.addDataPoint(1.62452727885217f);
+    graph_t.addDataPoint(1.57093487085471f);
+    graph_t.addDataPoint(1.2919498389466f);
+    graph_t.addDataPoint(0.878345441005528f);
 
     add(__background);
     add(btn_test);
+    add(graph_t);
 }
 
 void screenViewBase::setupScreen()
