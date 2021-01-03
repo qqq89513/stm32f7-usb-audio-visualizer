@@ -81,6 +81,8 @@ UART_HandleTypeDef huart1;
 SDRAM_HandleTypeDef hsdram1;
 
 /* USER CODE BEGIN PV */
+TS_StateTypeDef TS_state;
+
 /** @brief using printf() as HAL_UART_Transmit() */
 #ifdef __GNUC__
 /* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf

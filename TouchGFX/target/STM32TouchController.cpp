@@ -18,13 +18,18 @@
 /* USER CODE BEGIN STM32TouchController */
 
 #include <STM32TouchController.hpp>
+#include <stdio.h>
+#include "stm32746g_discovery_ts.h"
 
+extern TS_StateTypeDef TS_state;
 void STM32TouchController::init()
 {
     /**
      * Initialize touch controller and driver
      *
      */
+    if(BSP_TS_Init(480, 272) != TS_OK)
+      printf("TS failed to init. File:%s, @line:%d\r\n", __FILE__, __LINE__);
 }
 
 bool STM32TouchController::sampleTouch(int32_t& x, int32_t& y)
@@ -39,6 +44,12 @@ bool STM32TouchController::sampleTouch(int32_t& x, int32_t& y)
      * By default sampleTouch is called every tick, this can be adjusted by HAL::setTouchSampleRate(int8_t);
      *
      */
+    BSP_TS_GetState(&TS_state);
+    if(TS_state.touchDetected){
+      x = TS_state.touchX[0];
+      y = TS_state.touchY[0];
+      return true;
+    }
     return false;
 }
 
