@@ -137,14 +137,19 @@ int main(void)
   MX_QUADSPI_Init();
   MX_SAI2_Init();
   MX_USART1_UART_Init();
-  MX_USB_DEVICE_Init();
-  MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
+  printf("MX initialized.\r\n");
   if(BSP_SDRAM_Init() == SDRAM_OK)
     printf("SDRAM Initialized.\r\n");
   else
     printf("SDRAM Init failed. @line:%d\r\n", __LINE__);
-  printf("MX initialized.\r\n");
+  
+  MX_TouchGFX_Init();
+  printf("TouchGFX initialized.\r\n");
+
+  MX_USB_DEVICE_Init();
+  printf("USB DEVICE initialized.\r\n");
+
   printf("Entering while(1)...\r\n");
   /* USER CODE END 2 */
 
