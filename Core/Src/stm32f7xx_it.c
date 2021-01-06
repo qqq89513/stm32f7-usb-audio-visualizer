@@ -62,7 +62,7 @@ extern LTDC_HandleTypeDef hltdc;
 extern TIM_HandleTypeDef htim1;
 
 /* USER CODE BEGIN EV */
-
+extern SAI_HandleTypeDef haudio_out_sai;  // forwarded from stm32746g_discovery_audio.c
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -266,10 +266,8 @@ void DMA2D_IRQHandler(void)
   */
 void DMA2_Stream4_IRQHandler(void)
 {
-  // HAL_DMA_IRQHandler(&hdma_sai2_a);
-  // Clear DMA2 stream4 half transfer and transfer complete interrupt flag,
-  // aka write 1 into CTCIF4 and CHTIF4 of DMA2, see more in official reference manual
-  DMA2->HIFCR |= (1<<5 | 1<<4);
+  // haudio_out_sai is and it's DMA is initialized in stm32746g_discovery_audio.c
+  HAL_DMA_IRQHandler(haudio_out_sai.hdmatx);
 }
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
