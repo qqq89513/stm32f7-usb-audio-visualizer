@@ -145,18 +145,7 @@ int main(void)
   else
     printf("SDRAM Init failed. @line:%d\r\n", __LINE__);
   printf("MX initialized.\r\n");
-  printf("Initializing BSP...\r\n");
-  
-//   BSP audio initialization
-//  if(BSP_AUDIO_IN_InitEx(INPUT_DEVICE_DIGITAL_MICROPHONE_2, SAI_AUDIO_FREQUENCY_44K, DEFAULT_AUDIO_IN_BIT_RESOLUTION, 1) == AUDIO_OK)
-//    printf("BSP_AUDIO initailized.\r\n");
-//  else
-//    printf("BSP_AUDIO failed to initailized. @line:%d\r\n", __LINE__);
-
-  // BSP touch screen initializtion
-  BSP_TS_Init(LCD_MAX_X, LCD_MAX_Y);
-
-  printf("BSP_LCD, BSP_TS initialized.\r\n");
+  printf("Entering while(1)...\r\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
