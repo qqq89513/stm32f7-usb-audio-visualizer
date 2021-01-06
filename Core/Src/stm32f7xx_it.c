@@ -258,5 +258,18 @@ void DMA2D_IRQHandler(void)
 
 /* USER CODE BEGIN 1 */
 
+/**
+  * @brief This function handles DMA2 stream4 global interrupt.
+  * Using BSP_AUDIO activates DMA transfers.
+  * But without handling IRQHandler,
+  *   the program jumps to infinitie loop in startup_stm32f746nghx.s
+  */
+void DMA2_Stream4_IRQHandler(void)
+{
+  // HAL_DMA_IRQHandler(&hdma_sai2_a);
+  // Clear DMA2 stream4 half transfer and transfer complete interrupt flag,
+  // aka write 1 into CTCIF4 and CHTIF4 of DMA2, see more in official reference manual
+  DMA2->HIFCR |= (1<<5 | 1<<4);
+}
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
