@@ -148,6 +148,8 @@ TIM_HandleTypeDef         haudio_tim;
 
 uint16_t __IO AudioInVolume = DEFAULT_AUDIO_IN_VOLUME;
     
+uint16_t VU_Level_Left, VU_Level_Right;
+
 /**
   * @}
   */ 
@@ -464,7 +466,47 @@ void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
 {
   /* Manage the remaining file size and new address offset: This function 
      should be coded by user (its prototype is already declared in stm32746g_discovery_audio.h) */
+
+  /* go over the samples and find VU level - actually after the played samples */
+  {
+	  int i;
+	  uint16_t *sampleBuf = (uint16_t *)hsai->pBuffPtr;
+	  uint16_t sample;
+
+	  // search backwards for latest sample played
+	  sampleBuf += hsai->XferSize / 2;
+	  // we cannot go over all the samples - reduce
+	  for (i = hsai->XferSize; i > (hsai->XferSize - 32); i--){
+		  sample = *sampleBuf--;
+		  if ( ! (sample & 0x8000)){
+			  //just positive samples
+			  if (sample > VU_Level_Left)
+				  VU_Level_Left = sample;
+			}
+		  sample = *sampleBuf--;
+		  if ( ! (sample & 0x8000)){
+			  if (sample > VU_Level_Right)
+				  VU_Level_Right = sample;
+		  }
+	  }
+  }
+
+
   BSP_AUDIO_OUT_TransferComplete_CallBack();
+}
+
+/**
+  * @brief  TGet back the VU Levels of recent sent sample buffer.
+  * @retval or-ed VU level, left and right, each 16bit
+  */
+uint32_t HAL_SAI_GetVULevels(void)
+{
+	uint32_t vuLevel;
+	vuLevel  = (uint32_t)VU_Level_Left;
+	vuLevel <<= 16;
+	vuLevel |= (VU_Level_Right & 0xFFFF);
+	VU_Level_Left = VU_Level_Right = 0;
+	return vuLevel;
 }
 
 /**
@@ -619,6 +661,10 @@ __weak void BSP_AUDIO_OUT_MspInit(SAI_HandleTypeDef *hsai, void *Params)
   */
 __weak void BSP_AUDIO_OUT_MspDeInit(SAI_HandleTypeDef *hsai, void *Params)
 {
+	/*
+	 * Here is actually missing to deinit the second I2S output !
+	 */
+
     GPIO_InitTypeDef  gpio_init_structure;
 
     /* SAI DMA IRQ Channel deactivation */

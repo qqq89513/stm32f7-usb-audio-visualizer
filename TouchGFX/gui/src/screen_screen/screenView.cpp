@@ -25,19 +25,22 @@ void screenView::tearDownScreen()
 }
 
 void screenView::handleTickEvent(){
-  static uint32_t tk_graph = 0;
-  static uint32_t tk_ctl = 0;
+  static uint32_t tk_graph = 0;      // ticks to update graph_t
+  static uint32_t tk_vol_ctrl = 0;   // ticks to update volume from slider1
+  static uint32_t tk_vu = 0;         // ticks to update vu_L and vu_R
+
   static int volume = 50;
   if(uwTick - tk_graph > 40){
     tk_graph = uwTick;
     graph_t.addDataPoint(sinf(uwTick*0.004));
   }
-  if(uwTick - tk_ctl > 100){
-    tk_ctl = uwTick;
+
+  if(uwTick - tk_vol_ctrl > 50){
+    tk_vol_ctrl = uwTick;
 
     // Update volume if USB connected
     int usb_conn_state = hUsbDeviceFS.dev_state;
-    printf("usb_conn_state:%d\r\n", usb_conn_state);
+    // printf("usb_conn_state:%d\r\n", usb_conn_state);
     switch(usb_conn_state){
       case USBD_STATE_DEFAULT:
         break;
@@ -54,4 +57,19 @@ void screenView::handleTickEvent(){
       default:;
     }
   }
+
+  if(uwTick - tk_vu > 50){
+    tk_vu = uwTick;
+
+    int lv_L = VU_Level_Left *slider1.getValue()/5000;
+    int lv_R = VU_Level_Right*slider1.getValue()/5000;
+    printf("L:%d, R:%d\r\n", lv_L, lv_R);
+    VU_Level_Left = 0;
+    VU_Level_Right = 0;
+    vu_L.setValue(lv_L);
+    vu_L.invalidate();
+    vu_R.setValue(lv_R);
+    vu_R.invalidate();
+  }
+
 }
