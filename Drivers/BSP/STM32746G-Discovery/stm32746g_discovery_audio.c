@@ -467,31 +467,6 @@ void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
   /* Manage the remaining file size and new address offset: This function 
      should be coded by user (its prototype is already declared in stm32746g_discovery_audio.h) */
 
-  /* go over the samples and find VU level - actually after the played samples */
-  {
-	  int i;
-	  uint16_t *sampleBuf = (uint16_t *)hsai->pBuffPtr;
-	  uint16_t sample;
-
-	  // search backwards for latest sample played
-	  sampleBuf += hsai->XferSize / 2;
-	  // we cannot go over all the samples - reduce
-	  for (i = hsai->XferSize; i > (hsai->XferSize - 32); i--){
-		  sample = *sampleBuf--;
-		  if ( ! (sample & 0x8000)){
-			  //just positive samples
-			  if (sample > VU_Level_Left)
-				  VU_Level_Left = sample;
-			}
-		  sample = *sampleBuf--;
-		  if ( ! (sample & 0x8000)){
-			  if (sample > VU_Level_Right)
-				  VU_Level_Right = sample;
-		  }
-	  }
-  }
-
-
   BSP_AUDIO_OUT_TransferComplete_CallBack();
 }
 
@@ -518,6 +493,31 @@ void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 {
   /* Manage the remaining file size and new address offset: This function 
      should be coded by user (its prototype is already declared in stm32746g_discovery_audio.h) */
+  
+  /* go over the samples and find VU level - actually after the played samples */
+  {
+	  int i;
+	  uint16_t *sampleBuf = (uint16_t *)hsai->pBuffPtr;
+	  uint16_t sample;
+
+	  // search backwards for latest sample played
+	  sampleBuf += hsai->XferSize / 2;
+	  // we cannot go over all the samples - reduce
+	  for (i = hsai->XferSize; i > (hsai->XferSize - 32); i--){
+		  sample = *sampleBuf--;
+		  if ( ! (sample & 0x8000)){
+			  //just positive samples
+			  if (sample > VU_Level_Left)
+				  VU_Level_Left = sample;
+			}
+		  sample = *sampleBuf--;
+		  if ( ! (sample & 0x8000)){
+			  if (sample > VU_Level_Right)
+				  VU_Level_Right = sample;
+		  }
+	  }
+  }
+
   BSP_AUDIO_OUT_HalfTransfer_CallBack();
 }
 
