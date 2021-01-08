@@ -61,9 +61,24 @@ void screenView::handleTickEvent(){
   if(uwTick - tk_vu > 50){
     tk_vu = uwTick;
 
-    int lv_L = VU_Level_Left *slider1.getValue()/5000;
-    int lv_R = VU_Level_Right*slider1.getValue()/5000;
-    printf("L:%d, R:%d\r\n", lv_L, lv_R);
+    static int16_t lv_L = 0;
+    static int16_t lv_R = 0;
+    int16_t temp_L = VU_Level_Left *slider1.getValue()/3000;
+    int16_t temp_R = VU_Level_Right*slider1.getValue()/3000;
+
+    // Restirction
+    if(temp_L > 100) temp_L = 100;
+    if(temp_R > 100) temp_R = 100;
+
+    // Decrease display volume conditionaly for animation
+    if(lv_L <= temp_L)    lv_L = temp_L;
+    else if(lv_L >= 5)    lv_L -= (lv_L - temp_L)/5;
+    else                  lv_L = 0;
+    if(lv_R <= temp_R)    lv_R = temp_R;
+    else if(lv_R >= 5)    lv_R -= (lv_R - temp_R)/5;
+    else                  lv_R = 0;
+
+    // printf("L:%d, R:%d\r\n", lv_L, lv_R);
     VU_Level_Left = 0;
     VU_Level_Right = 0;
     vu_L.setValue(lv_L);
