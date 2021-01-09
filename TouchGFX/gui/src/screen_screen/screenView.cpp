@@ -8,6 +8,7 @@
 extern __IO uint32_t uwTick;                      // forwarded from stm32f7xx_hal.c
 extern uint16_t VU_Level_Left, VU_Level_Right;    // forwarded from stm32746g_discovery_audio.c
 extern USBD_HandleTypeDef hUsbDeviceFS;           // forwarded from usb_device.c
+extern SAI_HandleTypeDef haudio_out_sai;          // forwarded from stm32746g_discovery.c
 
 screenView::screenView()
 {
@@ -30,9 +31,16 @@ void screenView::handleTickEvent(){
   static uint32_t tk_vu = 0;         // ticks to update vu_L and vu_R
 
   static int volume = 50;
-  if(uwTick - tk_graph > 40){
+  if(uwTick - tk_graph > 50){
     tk_graph = uwTick;
-    graph_t.addDataPoint(sinf(uwTick*0.004));
+    int16_t *samplePtr = (int16_t*)(haudio_out_sai.pBuffPtr);
+    uint16_t size = haudio_out_sai.XferSize/2;
+    // printf("[Debug] XferSize/2:%d, pBuffPtr:%p\r\n", size, samplePtr);
+    uint32_t tk_temp = uwTick;
+    for(int i=0; i<400; i++){
+      graph_t.addDataPoint(samplePtr[i]/200 + 2);
+    }
+    // printf("[Debug] Adding datapoint to dynamic graph. Time elapsed:%ldms\r\n", uwTick-tk_temp);
   }
 
   if(uwTick - tk_vol_ctrl > 50){
