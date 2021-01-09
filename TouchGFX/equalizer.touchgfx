@@ -55,13 +55,13 @@
           {
             "Type": "DynamicGraph",
             "DataSeed": -2067295002,
-            "NumberOfValues": 100,
-            "MaxY": 2.0,
-            "MinY": -2.0,
-            "Precision": "0.1",
+            "NumberOfValues": 400,
+            "MaxY": 100.0,
+            "MinY": -100.0,
+            "Precision": "1",
             "UseCustomVisibleDataPointRange": false,
             "FirstIndex": 0,
-            "LastIndex": 99,
+            "LastIndex": 399,
             "MapDataPointIndexToCustomValue": false,
             "XAxisOffset": 0.0,
             "XAxisScale": 1.0,
@@ -78,20 +78,21 @@
             "GraphType": "GraphWrapOverwrite",
             "GraphDrawers": [
               {
-                "Type": "LineDrawer",
-                "LineWidth": 2,
+                "Type": "HistogramDrawer",
+                "BarWidth": 1,
+                "BarOffset": 0,
                 "Color": {
-                  "Red": 21,
-                  "Green": 197,
-                  "Blue": 20
+                  "Red": 130,
+                  "Green": 20,
+                  "Blue": 197
                 },
                 "Alpha": 255
               }
             ],
             "Name": "graph_t",
-            "X": 80,
-            "Y": 16,
-            "Width": 320,
+            "X": 50,
+            "Y": 6,
+            "Width": 400,
             "Height": 193,
             "Visible": true,
             "LockPosition": false,

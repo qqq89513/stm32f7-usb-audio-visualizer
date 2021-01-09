@@ -11,9 +11,9 @@
 #include <touchgfx/containers/buttons/Buttons.hpp>
 #include <touchgfx/widgets/graph/GraphWrapAndOverwrite.hpp>
 #include <touchgfx/widgets/graph/GraphElements.hpp>
-#include <touchgfx/widgets/canvas/PainterRGB565.hpp>
 #include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/containers/progress_indicators/LineProgress.hpp>
+#include <touchgfx/widgets/canvas/PainterRGB565.hpp>
 
 class screenViewBase : public touchgfx::View<screenPresenter>
 {
@@ -32,9 +32,8 @@ protected:
      */
     touchgfx::Box __background;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > btn_test;
-    touchgfx::GraphWrapAndOverwrite<100> graph_t;
-    touchgfx::GraphElementLine graph_tLine1;
-    touchgfx::PainterRGB565 graph_tLine1Painter;
+    touchgfx::GraphWrapAndOverwrite<400> graph_t;
+    touchgfx::GraphElementHistogram graph_tHistogram1;
     touchgfx::Slider slider1;
     touchgfx::LineProgress vu_L;
     touchgfx::PainterRGB565 vu_LPainter;
