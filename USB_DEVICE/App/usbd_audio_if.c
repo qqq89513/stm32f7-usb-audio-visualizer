@@ -155,9 +155,9 @@ static int8_t AUDIO_Init_FS(uint32_t AudioFreq, uint32_t Volume, uint32_t option
 {
   /* USER CODE BEGIN 0 */
   if(BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_AUTO, Volume, AudioFreq) == AUDIO_OK)
-     printf("BSP_AUDIO initailized.\r\n");
+     printf("[Info] BSP_AUDIO initailized.\r\n");
   else
-    printf("BSP_AUDIO failed to initailized. @line:%d\r\n", __LINE__);
+    printf("[Error] BSP_AUDIO failed to initailized. @line:%d\r\n", __LINE__);
 
   /* Update the Audio frame slot configuration to match the PCM standard instead of TDM */
   BSP_AUDIO_OUT_SetAudioFrameSlot(CODEC_AUDIOFRAME_SLOT_02);

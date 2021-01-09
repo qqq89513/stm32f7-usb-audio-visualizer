@@ -135,22 +135,22 @@ int main(void)
   MX_SAI2_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  printf("MX initialized.\r\n");
+  printf("[Info] MX initialized.\r\n");
 
   // Initializing FMC, SDRAM, LTDC and DMA2D
   MX_FMC_Init();
-  if(BSP_SDRAM_Init() == SDRAM_OK)  printf("SDRAM Initialized.\r\n");
-  else                              printf("SDRAM Init failed. @line:%d\r\n", __LINE__);
+  if(BSP_SDRAM_Init() == SDRAM_OK)  printf("[Info] SDRAM Initialized.\r\n");
+  else                              printf("[Error]SDRAM Init failed. @line:%d\r\n", __LINE__);
   MX_LTDC_Init();
   MX_DMA2D_Init();
   
   MX_TouchGFX_Init();
-  printf("TouchGFX initialized.\r\n");
+  printf("[Info] TouchGFX initialized.\r\n");
 
   MX_USB_DEVICE_Init();
-  printf("USB DEVICE initialized.\r\n");
+  printf("[Info] USB DEVICE initialized.\r\n");
 
-  printf("Entering while(1)...\r\n");
+  printf("[Info] Entering while(1)...\r\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -952,7 +952,7 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-
+  printf("[Error] Error_Handler entered. File:%s, @line:%d\r\n", __FILE__, __LINE__);
   /* USER CODE END Error_Handler_Debug */
 }
 
