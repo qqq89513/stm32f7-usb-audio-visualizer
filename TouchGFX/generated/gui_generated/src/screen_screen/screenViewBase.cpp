@@ -19,7 +19,7 @@ screenViewBase::screenViewBase()
     btn_test.setPosition(0, 222, 50, 50);
 
     graph_t.setScale(1);
-    graph_t.setPosition(50, 6, 400, 193);
+    graph_t.setPosition(40, 0, 400, 193);
     graph_t.setGraphAreaMargin(0, 0, 0, 0);
     graph_t.setGraphAreaPadding(0, 0, 0, 0);
     graph_t.setGraphRangeY(-100, 100);
@@ -440,26 +440,24 @@ screenViewBase::screenViewBase()
     vu_L.setXY(0, 0);
     vu_L.setProgressIndicatorPosition(0, 0, 20, 184);
     vu_L.setRange(0, 100);
-    vu_L.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_MEDIUM_PROGRESS_INDICATOR_BG_ROUND_90_DEGREES_ID));
-    vu_LPainter.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 151, 255));
+    vu_LPainter.setBitmap(touchgfx::Bitmap(BITMAP_VU_METER_ID));
     vu_L.setPainter(vu_LPainter);
-    vu_L.setStart(10, 10);
-    vu_L.setEnd(10, 174);
+    vu_L.setStart(10, 174);
+    vu_L.setEnd(10, 10);
     vu_L.setLineWidth(16);
-    vu_L.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
-    vu_L.setValue(60);
+    vu_L.setLineEndingStyle(touchgfx::Line::SQUARE_CAP_ENDING);
+    vu_L.setValue(100);
 
-    vu_R.setXY(20, 0);
+    vu_R.setXY(460, 0);
     vu_R.setProgressIndicatorPosition(0, 0, 20, 184);
     vu_R.setRange(0, 100);
-    vu_R.setBackground(touchgfx::Bitmap(BITMAP_BLUE_PROGRESSINDICATORS_BG_MEDIUM_PROGRESS_INDICATOR_BG_ROUND_90_DEGREES_ID));
-    vu_RPainter.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 151, 255));
+    vu_RPainter.setBitmap(touchgfx::Bitmap(BITMAP_VU_METER_ID));
     vu_R.setPainter(vu_RPainter);
-    vu_R.setStart(10, 10);
-    vu_R.setEnd(10, 174);
+    vu_R.setStart(10, 174);
+    vu_R.setEnd(10, 10);
     vu_R.setLineWidth(16);
-    vu_R.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
-    vu_R.setValue(60);
+    vu_R.setLineEndingStyle(touchgfx::Line::SQUARE_CAP_ENDING);
+    vu_R.setValue(100);
 
     add(__background);
     add(btn_test);

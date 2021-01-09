@@ -148,7 +148,7 @@ int main(void)
   printf("[Info] TouchGFX initialized.\r\n");
 
   MX_USB_DEVICE_Init();
-  HAL_Delay(100);
+  HAL_Delay(200);
   printf("[Info] USB DEVICE initialized.\r\n");
 
   printf("[Info] Entering while(1)...\r\n");

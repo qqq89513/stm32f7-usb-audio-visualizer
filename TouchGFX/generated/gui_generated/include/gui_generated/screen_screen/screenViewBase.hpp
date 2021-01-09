@@ -13,7 +13,7 @@
 #include <touchgfx/widgets/graph/GraphElements.hpp>
 #include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/containers/progress_indicators/LineProgress.hpp>
-#include <touchgfx/widgets/canvas/PainterRGB565.hpp>
+#include <touchgfx/widgets/canvas/PainterRGB565Bitmap.hpp>
 
 class screenViewBase : public touchgfx::View<screenPresenter>
 {
@@ -36,9 +36,9 @@ protected:
     touchgfx::GraphElementHistogram graph_tHistogram1;
     touchgfx::Slider slider1;
     touchgfx::LineProgress vu_L;
-    touchgfx::PainterRGB565 vu_LPainter;
+    touchgfx::PainterRGB565Bitmap vu_LPainter;
     touchgfx::LineProgress vu_R;
-    touchgfx::PainterRGB565 vu_RPainter;
+    touchgfx::PainterRGB565Bitmap vu_RPainter;
 
 private:
 
