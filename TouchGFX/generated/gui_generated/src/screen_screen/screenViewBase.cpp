@@ -19,7 +19,7 @@ screenViewBase::screenViewBase()
     btn_test.setPosition(0, 222, 50, 50);
 
     graph_t.setScale(10);
-    graph_t.setPosition(80, 16, 320, 240);
+    graph_t.setPosition(80, 16, 320, 193);
     graph_t.setGraphAreaMargin(0, 0, 0, 0);
     graph_t.setGraphAreaPadding(0, 0, 0, 0);
     graph_t.setGraphRangeY(-2, 2);

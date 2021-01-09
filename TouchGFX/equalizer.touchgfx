@@ -75,7 +75,7 @@
             "PaddingBottom": 0,
             "PaddingLeft": 0,
             "PaddingRight": 0,
-            "GraphType": "GraphScroll",
+            "GraphType": "GraphWrapOverwrite",
             "GraphDrawers": [
               {
                 "Type": "LineDrawer",
@@ -92,7 +92,7 @@
             "X": 80,
             "Y": 16,
             "Width": 320,
-            "Height": 240,
+            "Height": 193,
             "Visible": true,
             "LockPosition": false,
             "Draggable": false,

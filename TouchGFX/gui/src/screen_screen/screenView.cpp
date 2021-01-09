@@ -40,7 +40,7 @@ void screenView::handleTickEvent(){
 
     // Update volume if USB connected
     int usb_conn_state = hUsbDeviceFS.dev_state;
-    // printf("usb_conn_state:%d\r\n", usb_conn_state);
+    // printf("[Debug] usb_conn_state:%d\r\n", usb_conn_state);
     switch(usb_conn_state){
       case USBD_STATE_DEFAULT:
         break;
