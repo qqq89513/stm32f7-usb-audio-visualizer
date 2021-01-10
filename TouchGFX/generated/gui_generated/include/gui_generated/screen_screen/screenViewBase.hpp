@@ -11,9 +11,9 @@
 #include <touchgfx/containers/buttons/Buttons.hpp>
 #include <touchgfx/widgets/graph/GraphWrapAndOverwrite.hpp>
 #include <touchgfx/widgets/graph/GraphElements.hpp>
-#include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/containers/progress_indicators/LineProgress.hpp>
 #include <touchgfx/widgets/canvas/PainterRGB565Bitmap.hpp>
+#include <touchgfx/containers/Slider.hpp>
 
 class screenViewBase : public touchgfx::View<screenPresenter>
 {
@@ -21,6 +21,14 @@ public:
     screenViewBase();
     virtual ~screenViewBase() {}
     virtual void setupScreen();
+
+    /*
+     * Virtual Action Handlers
+     */
+    virtual void btn_color_onclick()
+    {
+        // Override and implement this function in screen
+    }
 
 protected:
     FrontendApplication& application() {
@@ -32,13 +40,17 @@ protected:
      */
     touchgfx::Box __background;
     touchgfx::IconButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > > btn_config;
+    touchgfx::IconButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > > btn_color;
     touchgfx::GraphWrapAndOverwrite<400> graph_t;
     touchgfx::GraphElementHistogram graph_tHistogram1;
-    touchgfx::Slider slider1;
     touchgfx::LineProgress vu_L;
     touchgfx::PainterRGB565Bitmap vu_LPainter;
     touchgfx::LineProgress vu_R;
     touchgfx::PainterRGB565Bitmap vu_RPainter;
+    touchgfx::Slider sliderB;
+    touchgfx::Slider sliderG;
+    touchgfx::Slider sliderR;
+    touchgfx::Slider slider_volume;
 
 private:
 

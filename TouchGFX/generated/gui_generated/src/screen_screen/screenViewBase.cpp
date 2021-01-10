@@ -20,7 +20,16 @@ screenViewBase::screenViewBase() :
     btn_config.setIconBitmaps(Bitmap(BITMAP_DARK_ICONS_SETTINGS_48_ID), Bitmap(BITMAP_DARK_ICONS_SETTINGS_48_ID));
     btn_config.setIconXY(0, 0);
     btn_config.setPosition(0, 222, 50, 50);
+    btn_config.setVisible(false);
     btn_config.setAction(flexButtonCallback);
+
+    btn_color.setBoxWithBorderPosition(0, 0, 50, 50);
+    btn_color.setBorderSize(0);
+    btn_color.setBoxWithBorderColors(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0), touchgfx::Color::getColorFrom24BitRGB(132, 212, 239), touchgfx::Color::getColorFrom24BitRGB(0, 0, 0), touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
+    btn_color.setIconBitmaps(Bitmap(BITMAP_DARK_ICONS_SETTINGS_48_ID), Bitmap(BITMAP_DARK_ICONS_SETTINGS_48_ID));
+    btn_color.setIconXY(0, 0);
+    btn_color.setPosition(0, 222, 50, 50);
+    btn_color.setAction(flexButtonCallback);
 
     graph_t.setScale(1);
     graph_t.setPosition(40, 0, 400, 193);
@@ -435,12 +444,6 @@ screenViewBase::screenViewBase() :
     graph_t.addDataPoint(16.1626179001913f);
     graph_t.addDataPoint(11.8161420198208f);
 
-    slider1.setXY(144, 232);
-    slider1.setBitmaps(touchgfx::Bitmap(BITMAP_DARK_SLIDER_HORIZONTAL_SMALL_SLIDER_HORIZONTAL_SMALL_ROUND_FILL_ID), touchgfx::Bitmap(BITMAP_DARK_SLIDER_HORIZONTAL_SMALL_SLIDER_HORIZONTAL_SMALL_ROUND_BACK_ID), touchgfx::Bitmap(BITMAP_DARK_ICONS_SOUND_32_ID));
-    slider1.setupHorizontalSlider(0, 0, 5, 11, 157);
-    slider1.setValueRange(0, 100);
-    slider1.setValue(100);
-
     vu_L.setXY(0, 0);
     vu_L.setProgressIndicatorPosition(0, 0, 20, 184);
     vu_L.setRange(0, 100);
@@ -463,12 +466,43 @@ screenViewBase::screenViewBase() :
     vu_R.setLineEndingStyle(touchgfx::Line::SQUARE_CAP_ENDING);
     vu_R.setValue(100);
 
+    sliderB.setXY(64, 255);
+    sliderB.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_SLIDER_INDICATOR_BLUE_ID));
+    sliderB.setVisible(false);
+    sliderB.setupHorizontalSlider(3, 7, 0, 36, 306);
+    sliderB.setValueRange(0, 255);
+    sliderB.setValue(5);
+
+    sliderG.setXY(64, 238);
+    sliderG.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_SLIDER_INDICATOR_GREEN_ID));
+    sliderG.setVisible(false);
+    sliderG.setupHorizontalSlider(3, 7, 0, 36, 306);
+    sliderG.setValueRange(0, 255);
+    sliderG.setValue(5);
+
+    sliderR.setXY(64, 221);
+    sliderR.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_SLIDER_INDICATOR_RED_ID));
+    sliderR.setVisible(false);
+    sliderR.setupHorizontalSlider(3, 7, 0, 36, 306);
+    sliderR.setValueRange(0, 255);
+    sliderR.setValue(255);
+
+    slider_volume.setXY(144, 232);
+    slider_volume.setBitmaps(touchgfx::Bitmap(BITMAP_DARK_SLIDER_HORIZONTAL_SMALL_SLIDER_HORIZONTAL_SMALL_ROUND_FILL_ID), touchgfx::Bitmap(BITMAP_DARK_SLIDER_HORIZONTAL_SMALL_SLIDER_HORIZONTAL_SMALL_ROUND_BACK_ID), touchgfx::Bitmap(BITMAP_DARK_ICONS_SOUND_32_ID));
+    slider_volume.setupHorizontalSlider(0, 0, 5, 11, 157);
+    slider_volume.setValueRange(0, 100);
+    slider_volume.setValue(100);
+
     add(__background);
     add(btn_config);
+    add(btn_color);
     add(graph_t);
-    add(slider1);
     add(vu_L);
     add(vu_R);
+    add(sliderB);
+    add(sliderG);
+    add(sliderR);
+    add(slider_volume);
 }
 
 void screenViewBase::setupScreen()
@@ -484,5 +518,12 @@ void screenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonCon
         //When btn_config clicked change screen to screen_config
         //Go to screen_config with screen transition towards East
         application().gotoscreen_configScreenWipeTransitionEast();
+    }
+    else if (&src == &btn_color)
+    {
+        //Interaction_btn_color_onclick
+        //When btn_color clicked call virtual function
+        //Call btn_color_onclick
+        btn_color_onclick();
     }
 }
