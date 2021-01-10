@@ -14,6 +14,7 @@ extern USBD_HandleTypeDef hUsbDeviceFS;           // forwarded from usb_device.c
 extern SAI_HandleTypeDef haudio_out_sai;          // forwarded from stm32746g_discovery.c
 
 static int volume = 0;    // from slider_volume to to BSP_Out_SetVolume. 0~100
+static colortype color_graph_t; // Store the previous color of graph_tHistogram1
 
 screenView::screenView()
 {
@@ -24,6 +25,7 @@ screenView::screenView()
   slider_R.setValue( LCD16bpp::getRedFromColor( graph_tHistogram1.getColor()) );
   slider_G.setValue( LCD16bpp::getGreenFromColor( graph_tHistogram1.getColor()) );
   slider_B.setValue( LCD16bpp::getBlueFromColor( graph_tHistogram1.getColor()) );
+  color_graph_t.color = graph_tHistogram1.getColor().color;
 }
 
 void screenView::setupScreen()
@@ -51,6 +53,7 @@ void screenView::handleTickEvent(){
   static uint32_t tk_graph = 0;      // ticks to update graph_t
   static uint32_t tk_vol_ctrl = 0;   // ticks to update volume from slider_volume
   static uint32_t tk_vu = 0;         // ticks to update vu_L and vu_R
+  static uint32_t tk_color = 0;      // ticks to update color to graph_tHistogram1
 
   if(uwTick - tk_graph > 50){
     tk_graph = uwTick;
@@ -122,4 +125,15 @@ void screenView::handleTickEvent(){
     vu_R.invalidate();
   }
 
+  if(uwTick - tk_color > 50){
+    tk_color = uwTick;
+    color_graph_t.color = touchgfx::Color::getColorFrom24BitRGB(
+      slider_R.getValue(),
+      slider_G.getValue(),
+      slider_B.getValue()  ).color;
+
+    // Only update color if color changed for graphics performance
+    if(graph_tHistogram1.getColor().color != color_graph_t.color)
+      graph_tHistogram1.setColor(color_graph_t);
+  }
 }
