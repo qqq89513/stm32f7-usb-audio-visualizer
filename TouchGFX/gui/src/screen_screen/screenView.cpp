@@ -13,6 +13,7 @@ extern SAI_HandleTypeDef haudio_out_sai;          // forwarded from stm32746g_di
 screenView::screenView()
 {
   tick_cnt = 0;
+  graph_t.clear();
 }
 
 void screenView::setupScreen()
@@ -37,9 +38,10 @@ void screenView::handleTickEvent(){
     uint16_t size = haudio_out_sai.XferSize/2;
     // printf("[Debug] XferSize/2:%d, pBuffPtr:%p\r\n", size, samplePtr);
     uint32_t tk_temp = uwTick;
-    for(int i=0; i<400; i++){
-      graph_t.addDataPoint(samplePtr[i]/200 + 2);
-    }
+    if(size > 0)
+      for(int i=0; i<400; i++){
+        graph_t.addDataPoint(samplePtr[i]/200 + 2);
+      }
     // printf("[Debug] Adding datapoint to dynamic graph. Time elapsed:%ldms\r\n", uwTick-tk_temp);
   }
 
@@ -60,8 +62,11 @@ void screenView::handleTickEvent(){
           BSP_AUDIO_OUT_SetVolume(slider1.getValue());
         break;
       case USBD_STATE_SUSPENDED:
+        HAL_DMA_Abort(haudio_out_sai.hdmatx);
+        haudio_out_sai.XferSize = 0;
         BSP_AUDIO_OUT_DeInit();
         slider1.setValue(0);
+        graph_t.clear();
       default:;
     }
   }
