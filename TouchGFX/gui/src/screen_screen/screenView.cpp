@@ -10,10 +10,13 @@ extern uint16_t VU_Level_Left, VU_Level_Right;    // forwarded from stm32746g_di
 extern USBD_HandleTypeDef hUsbDeviceFS;           // forwarded from usb_device.c
 extern SAI_HandleTypeDef haudio_out_sai;          // forwarded from stm32746g_discovery.c
 
+static int volume = 0;    // from slider1 to to BSP_Out_SetVolume. 0~100
+
 screenView::screenView()
 {
   tick_cnt = 0;
   graph_t.clear();
+  slider1.setValue(volume+1);
 }
 
 void screenView::setupScreen()
@@ -31,7 +34,6 @@ void screenView::handleTickEvent(){
   static uint32_t tk_vol_ctrl = 0;   // ticks to update volume from slider1
   static uint32_t tk_vu = 0;         // ticks to update vu_L and vu_R
 
-  static int volume = 50;
   if(uwTick - tk_graph > 50){
     tk_graph = uwTick;
     int16_t *samplePtr = (int16_t*)(haudio_out_sai.pBuffPtr);
@@ -50,7 +52,7 @@ void screenView::handleTickEvent(){
 
     // Update volume if USB connected
     int usb_conn_state = hUsbDeviceFS.dev_state;
-    // printf("[Debug] usb_conn_state:%d\r\n", usb_conn_state);
+    printf("[Debug] usb_conn_state:%d\r\n", usb_conn_state);
     switch(usb_conn_state){
       case USBD_STATE_DEFAULT:
         break;
@@ -58,8 +60,10 @@ void screenView::handleTickEvent(){
         slider1.setValue(0);
         break;
       case USBD_STATE_CONFIGURED:
-        if(volume != slider1.getValue())
-          BSP_AUDIO_OUT_SetVolume(slider1.getValue());
+        if(volume != slider1.getValue()){
+          volume = slider1.getValue();
+          BSP_AUDIO_OUT_SetVolume(volume);
+        }
         break;
       case USBD_STATE_SUSPENDED:
         HAL_DMA_Abort(haudio_out_sai.hdmatx);

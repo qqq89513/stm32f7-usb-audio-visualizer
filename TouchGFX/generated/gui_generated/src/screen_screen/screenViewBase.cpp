@@ -5,7 +5,8 @@
 #include <touchgfx/Color.hpp>
 #include "BitmapDatabase.hpp"
 
-screenViewBase::screenViewBase()
+screenViewBase::screenViewBase() :
+    flexButtonCallback(this, &screenViewBase::flexButtonCallbackHandler)
 {
 
     touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
@@ -13,10 +14,13 @@ screenViewBase::screenViewBase()
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
 
-    btn_test.setBoxWithBorderPosition(0, 0, 50, 50);
-    btn_test.setBorderSize(5);
-    btn_test.setBoxWithBorderColors(touchgfx::Color::getColorFrom24BitRGB(0, 102, 153), touchgfx::Color::getColorFrom24BitRGB(0, 153, 204), touchgfx::Color::getColorFrom24BitRGB(0, 51, 102), touchgfx::Color::getColorFrom24BitRGB(51, 102, 153));
-    btn_test.setPosition(0, 222, 50, 50);
+    btn_config.setBoxWithBorderPosition(0, 0, 50, 50);
+    btn_config.setBorderSize(0);
+    btn_config.setBoxWithBorderColors(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0), touchgfx::Color::getColorFrom24BitRGB(132, 212, 239), touchgfx::Color::getColorFrom24BitRGB(0, 0, 0), touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
+    btn_config.setIconBitmaps(Bitmap(BITMAP_DARK_ICONS_SETTINGS_48_ID), Bitmap(BITMAP_DARK_ICONS_SETTINGS_48_ID));
+    btn_config.setIconXY(0, 0);
+    btn_config.setPosition(0, 222, 50, 50);
+    btn_config.setAction(flexButtonCallback);
 
     graph_t.setScale(1);
     graph_t.setPosition(40, 0, 400, 193);
@@ -431,11 +435,11 @@ screenViewBase::screenViewBase()
     graph_t.addDataPoint(16.1626179001913f);
     graph_t.addDataPoint(11.8161420198208f);
 
-    slider1.setXY(301, 239);
-    slider1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_SMALL_SLIDER_HORIZONTAL_SMALL_ROUND_BACK_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_SMALL_SLIDER_HORIZONTAL_SMALL_ROUND_FILL_ID), touchgfx::Bitmap(BITMAP_BLUE_SLIDER_HORIZONTAL_SMALL_INDICATORS_SLIDER_HORIZONTAL_SMALL_ROUND_KNOB_ID));
-    slider1.setupHorizontalSlider(3, 7, 0, 0, 125);
+    slider1.setXY(144, 232);
+    slider1.setBitmaps(touchgfx::Bitmap(BITMAP_DARK_SLIDER_HORIZONTAL_SMALL_SLIDER_HORIZONTAL_SMALL_ROUND_FILL_ID), touchgfx::Bitmap(BITMAP_DARK_SLIDER_HORIZONTAL_SMALL_SLIDER_HORIZONTAL_SMALL_ROUND_BACK_ID), touchgfx::Bitmap(BITMAP_DARK_ICONS_SOUND_32_ID));
+    slider1.setupHorizontalSlider(0, 0, 5, 11, 157);
     slider1.setValueRange(0, 100);
-    slider1.setValue(0);
+    slider1.setValue(100);
 
     vu_L.setXY(0, 0);
     vu_L.setProgressIndicatorPosition(0, 0, 20, 184);
@@ -460,7 +464,7 @@ screenViewBase::screenViewBase()
     vu_R.setValue(100);
 
     add(__background);
-    add(btn_test);
+    add(btn_config);
     add(graph_t);
     add(slider1);
     add(vu_L);
@@ -470,4 +474,15 @@ screenViewBase::screenViewBase()
 void screenViewBase::setupScreen()
 {
 
+}
+
+void screenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)
+{
+    if (&src == &btn_config)
+    {
+        //Interaction_btn_config_onclick
+        //When btn_config clicked change screen to screen_config
+        //Go to screen_config with screen transition towards East
+        application().gotoscreen_configScreenWipeTransitionEast();
+    }
 }

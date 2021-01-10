@@ -11,36 +11,43 @@
             },
             "ButtonStyles": [
               {
+                "Type": "IconButtonStyle",
+                "X": 0,
+                "Y": 0,
+                "IconReleased": "__designer\\Dark_Icons_Settings_48.png",
+                "IconPressed": "__designer\\Dark_Icons_Settings_48.png"
+              },
+              {
                 "Type": "BoxWithBorderButtonStyle",
                 "X": 0,
                 "Y": 0,
                 "Width": 50,
                 "Height": 50,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 5,
+                "LockToFlexButtonSize": false,
+                "BorderSize": 0,
                 "ColorReleased": {
                   "Red": 0,
-                  "Green": 102,
-                  "Blue": 153
+                  "Green": 0,
+                  "Blue": 0
                 },
                 "ColorPressed": {
-                  "Red": 0,
-                  "Green": 153,
-                  "Blue": 204
+                  "Red": 132,
+                  "Green": 212,
+                  "Blue": 239
                 },
                 "ColorBorderReleased": {
                   "Red": 0,
-                  "Green": 51,
-                  "Blue": 102
+                  "Green": 0,
+                  "Blue": 0
                 },
                 "ColorBorderPressed": {
-                  "Red": 51,
-                  "Green": 102,
-                  "Blue": 153
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
                 }
               }
             ],
-            "Name": "btn_test",
+            "Name": "btn_config",
             "X": 0,
             "Y": 222,
             "Width": 50,
@@ -104,23 +111,22 @@
           {
             "Type": "Slider",
             "IsHorizontalSlider": true,
-            "BackgroundUnselected": "__designer\\Blue_Slider_Horizontal_Small_slider_horizontal_small_round_back.png",
-            "BackgroundSelected": "__designer\\Blue_Slider_Horizontal_Small_slider_horizontal_small_round_fill.png",
-            "Indicator": "__designer\\Blue_Slider_Horizontal_Small_Indicators_slider_horizontal_small_round_knob.png",
-            "BackgroundX": 3,
-            "BackgroundY": 7,
-            "IndicatorPos": 0,
-            "IndicatorMax": 125,
-            "IndicatorMin": 0,
+            "BackgroundUnselected": "__designer\\Dark_Slider_Horizontal_Small_slider_horizontal_small_round_fill.png",
+            "BackgroundSelected": "__designer\\Dark_Slider_Horizontal_Small_slider_horizontal_small_round_back.png",
+            "Indicator": "__designer\\Dark_Icons_Sound_32.png",
+            "BackgroundX": 0,
+            "BackgroundY": 0,
+            "IndicatorPos": 5,
+            "IndicatorMax": 157,
+            "IndicatorMin": 11,
             "ValueMax": 100,
             "ValueMin": 0,
-            "InitValue": 0,
-            "Style": "Style13",
+            "InitValue": 100,
             "Name": "slider1",
-            "X": 301,
-            "Y": 239,
-            "Width": 179,
-            "Height": 34,
+            "X": 144,
+            "Y": 232,
+            "Width": 193,
+            "Height": 40,
             "Visible": true,
             "LockPosition": false,
             "Draggable": false,
@@ -201,10 +207,104 @@
             "Moveable": false
           }
         ],
-        "Interactions": [],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction_btn_config_onclick",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btn_config"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionWipe",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "screen_config"
+            }
+          }
+        ],
         "Name": "screen",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 7200
+      },
+      {
+        "Components": [
+          {
+            "Type": "FlexButton",
+            "Alpha": 255,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "IconButtonStyle",
+                "X": 0,
+                "Y": 3,
+                "IconReleased": "__designer\\Dark_Icons_Refresh_48.png",
+                "IconPressed": "__designer\\Dark_Icons_Refresh_48.png"
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "X": 0,
+                "Y": 0,
+                "Width": 50,
+                "Height": 50,
+                "LockToFlexButtonSize": false,
+                "BorderSize": 0,
+                "ColorReleased": {
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
+                },
+                "ColorPressed": {
+                  "Red": 132,
+                  "Green": 212,
+                  "Blue": 239
+                },
+                "ColorBorderReleased": {
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
+                },
+                "ColorBorderPressed": {
+                  "Red": 0,
+                  "Green": 0,
+                  "Blue": 0
+                }
+              }
+            ],
+            "Name": "btn_back",
+            "X": 0,
+            "Y": 223,
+            "Width": 50,
+            "Height": 49,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction_btn_back_onclick",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btn_back"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "screen"
+            }
+          }
+        ],
+        "Name": "screen_config",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
       }
     ],
     "CustomContainerDefinitions": [],

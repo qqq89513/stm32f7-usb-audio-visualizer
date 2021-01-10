@@ -31,7 +31,7 @@ protected:
      * Member Declarations
      */
     touchgfx::Box __background;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > btn_test;
+    touchgfx::IconButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > > btn_config;
     touchgfx::GraphWrapAndOverwrite<400> graph_t;
     touchgfx::GraphElementHistogram graph_tHistogram1;
     touchgfx::Slider slider1;
@@ -41,6 +41,16 @@ protected:
     touchgfx::PainterRGB565Bitmap vu_RPainter;
 
 private:
+
+    /*
+     * Callback Declarations
+     */
+    touchgfx::Callback<screenViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
+
+    /*
+     * Callback Handler Declarations
+     */
+    void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
 
     /*
      * Canvas Buffer Size

@@ -18,6 +18,11 @@ public:
     // screen
     void gotoscreenScreenNoTransition();
 
+    void gotoscreenScreenSlideTransitionEast();
+
+    // screen_config
+    void gotoscreen_configScreenWipeTransitionEast();
+
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
     FrontendHeap& frontendHeap;
@@ -25,6 +30,11 @@ protected:
 
     // screen
     void gotoscreenScreenNoTransitionImpl();
+
+    void gotoscreenScreenSlideTransitionEastImpl();
+
+    // screen_config
+    void gotoscreen_configScreenWipeTransitionEastImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP
