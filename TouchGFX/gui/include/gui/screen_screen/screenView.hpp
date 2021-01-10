@@ -12,6 +12,8 @@ public:
     virtual void setupScreen();
     virtual void tearDownScreen();
     void handleTickEvent();
+    void btn_color_onclick();
+    void SliderHandler(const Slider& sli, const ClickEvent& Event);
 
 protected:
     int tick_cnt;

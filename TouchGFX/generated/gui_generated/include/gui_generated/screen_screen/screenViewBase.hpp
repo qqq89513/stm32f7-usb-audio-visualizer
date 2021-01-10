@@ -47,9 +47,9 @@ protected:
     touchgfx::PainterRGB565Bitmap vu_LPainter;
     touchgfx::LineProgress vu_R;
     touchgfx::PainterRGB565Bitmap vu_RPainter;
-    touchgfx::Slider sliderB;
-    touchgfx::Slider sliderG;
-    touchgfx::Slider sliderR;
+    touchgfx::Slider slider_B;
+    touchgfx::Slider slider_G;
+    touchgfx::Slider slider_R;
     touchgfx::Slider slider_volume;
 
 private:

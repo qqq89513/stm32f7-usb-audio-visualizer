@@ -1,4 +1,7 @@
 #include <gui/screen_screen/screenView.hpp>
+
+// User include
+#include <../../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp>
 #include <stdio.h>
 #include <math.h>
 #include "stm32746g_discovery_audio.h"
@@ -17,6 +20,10 @@ screenView::screenView()
   tick_cnt = 0;
   graph_t.clear();
   slider_volume.setValue(volume+1);
+  
+  slider_R.setValue( LCD16bpp::getRedFromColor( graph_tHistogram1.getColor()) );
+  slider_G.setValue( LCD16bpp::getGreenFromColor( graph_tHistogram1.getColor()) );
+  slider_B.setValue( LCD16bpp::getBlueFromColor( graph_tHistogram1.getColor()) );
 }
 
 void screenView::setupScreen()
@@ -28,6 +35,17 @@ void screenView::tearDownScreen()
 {
   screenViewBase::tearDownScreen();
 }
+
+// This toggles the visibiilty of slider_volume and slider_RGB
+void screenView::btn_color_onclick(){
+  slider_volume.setVisible( !slider_volume.isVisible() ); slider_volume.invalidate();
+  slider_R.setVisible( !slider_R.isVisible() );           slider_R.invalidate();
+  slider_G.setVisible( !slider_G.isVisible() );           slider_G.invalidate();
+  slider_B.setVisible( !slider_B.isVisible() );           slider_B.invalidate();
+  printf("btn clicked \r\n");
+}
+
+
 
 void screenView::handleTickEvent(){
   static uint32_t tk_graph = 0;      // ticks to update graph_t
@@ -52,7 +70,7 @@ void screenView::handleTickEvent(){
 
     // Update volume if USB connected
     int usb_conn_state = hUsbDeviceFS.dev_state;
-    printf("[Debug] usb_conn_state:%d\r\n", usb_conn_state);
+    // printf("[Debug] usb_conn_state:%d\r\n", usb_conn_state);
     switch(usb_conn_state){
       case USBD_STATE_DEFAULT:
         break;

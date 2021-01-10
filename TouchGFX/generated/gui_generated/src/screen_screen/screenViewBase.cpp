@@ -466,26 +466,26 @@ screenViewBase::screenViewBase() :
     vu_R.setLineEndingStyle(touchgfx::Line::SQUARE_CAP_ENDING);
     vu_R.setValue(100);
 
-    sliderB.setXY(64, 255);
-    sliderB.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_SLIDER_INDICATOR_BLUE_ID));
-    sliderB.setVisible(false);
-    sliderB.setupHorizontalSlider(3, 7, 0, 36, 306);
-    sliderB.setValueRange(0, 255);
-    sliderB.setValue(5);
+    slider_B.setXY(64, 255);
+    slider_B.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_SLIDER_INDICATOR_BLUE_ID));
+    slider_B.setVisible(false);
+    slider_B.setupHorizontalSlider(3, 7, 0, 36, 306);
+    slider_B.setValueRange(0, 255);
+    slider_B.setValue(5);
 
-    sliderG.setXY(64, 238);
-    sliderG.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_SLIDER_INDICATOR_GREEN_ID));
-    sliderG.setVisible(false);
-    sliderG.setupHorizontalSlider(3, 7, 0, 36, 306);
-    sliderG.setValueRange(0, 255);
-    sliderG.setValue(5);
+    slider_G.setXY(64, 238);
+    slider_G.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_SLIDER_INDICATOR_GREEN_ID));
+    slider_G.setVisible(false);
+    slider_G.setupHorizontalSlider(3, 7, 0, 36, 306);
+    slider_G.setValueRange(0, 255);
+    slider_G.setValue(5);
 
-    sliderR.setXY(64, 221);
-    sliderR.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_SLIDER_INDICATOR_RED_ID));
-    sliderR.setVisible(false);
-    sliderR.setupHorizontalSlider(3, 7, 0, 36, 306);
-    sliderR.setValueRange(0, 255);
-    sliderR.setValue(255);
+    slider_R.setXY(64, 221);
+    slider_R.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_BLUE_DIVIDERS_DIVIDER_SHORT_ID), touchgfx::Bitmap(BITMAP_SLIDER_INDICATOR_RED_ID));
+    slider_R.setVisible(false);
+    slider_R.setupHorizontalSlider(3, 7, 0, 36, 306);
+    slider_R.setValueRange(0, 255);
+    slider_R.setValue(255);
 
     slider_volume.setXY(144, 232);
     slider_volume.setBitmaps(touchgfx::Bitmap(BITMAP_DARK_SLIDER_HORIZONTAL_SMALL_SLIDER_HORIZONTAL_SMALL_ROUND_FILL_ID), touchgfx::Bitmap(BITMAP_DARK_SLIDER_HORIZONTAL_SMALL_SLIDER_HORIZONTAL_SMALL_ROUND_BACK_ID), touchgfx::Bitmap(BITMAP_DARK_ICONS_SOUND_32_ID));
@@ -499,9 +499,9 @@ screenViewBase::screenViewBase() :
     add(graph_t);
     add(vu_L);
     add(vu_R);
-    add(sliderB);
-    add(sliderG);
-    add(sliderR);
+    add(slider_B);
+    add(slider_G);
+    add(slider_R);
     add(slider_volume);
 }
 
