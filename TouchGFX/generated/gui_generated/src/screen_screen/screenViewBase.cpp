@@ -14,6 +14,10 @@ screenViewBase::screenViewBase() :
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
 
+    tiledImage1.setBitmap(touchgfx::Bitmap(BITMAP_BLUE_TEXTURES_CARBON_FIBRE_ID));
+    tiledImage1.setPosition(0, 0, 480, 272);
+    tiledImage1.setOffset(0, 0);
+
     btn_config.setBoxWithBorderPosition(0, 0, 50, 50);
     btn_config.setBorderSize(0);
     btn_config.setBoxWithBorderColors(touchgfx::Color::getColorFrom24BitRGB(0, 0, 0), touchgfx::Color::getColorFrom24BitRGB(132, 212, 239), touchgfx::Color::getColorFrom24BitRGB(0, 0, 0), touchgfx::Color::getColorFrom24BitRGB(0, 0, 0));
@@ -494,6 +498,7 @@ screenViewBase::screenViewBase() :
     slider_volume.setValue(100);
 
     add(__background);
+    add(tiledImage1);
     add(btn_config);
     add(btn_color);
     add(graph_t);

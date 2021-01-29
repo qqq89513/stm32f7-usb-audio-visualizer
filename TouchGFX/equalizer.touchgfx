@@ -4,6 +4,24 @@
       {
         "Components": [
           {
+            "Type": "TiledImage",
+            "FileName": "__designer\\Blue_Textures_carbon_fibre.png",
+            "Alpha": 255,
+            "OffsetX": 0,
+            "OffsetY": 0,
+            "Name": "tiledImage1",
+            "X": 0,
+            "Y": 0,
+            "Width": 480,
+            "Height": 272,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
             "Type": "FlexButton",
             "Alpha": 255,
             "ButtonTrigger": {
